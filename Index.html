@@ -1,0 +1,382 @@
+/* 12 commands that turn notes into ideas
+Surface patterns across years of notes. Generate ideas grounded in your actual thinking. Track how your beliefs evolve over time. 
+Each command includes what it does, when to use it, and an example prompt you can adapt. Build the commands yourself, so you can customize them for your own vault.
+Turn Obsidian into a thinking partner. */
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>12 Commands: Turn Notes into Ideas | Obsidian Thinking Partner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f7f5f2;
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #1e1b18;
+            padding: 2rem 1.5rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* header & intro */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #2c3e2f, #1f4f2b, #b1624b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .sub {
+            font-size: 1.2rem;
+            color: #5a4e42;
+            max-width: 700px;
+            margin: 0.75rem auto 0;
+            border-top: 1px solid #e2ddd7;
+            padding-top: 1rem;
+        }
+
+        .tagline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0 2rem;
+            font-weight: 500;
+            color: #3e3a35;
+        }
+
+        .tagline span {
+            background: #eae6e0;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+
+        /* grid layout */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+
+        /* card design */
+        .command-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            overflow: hidden;
+            border: 1px solid #ece7e1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .command-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.1);
+            border-color: #cfc9c1;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.5rem 0.6rem 1.5rem;
+            border-bottom: 2px solid #f0ebe5;
+        }
+
+        .command-number {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #b1624b;
+            background: #fcf6f0;
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            margin-bottom: 0.7rem;
+        }
+
+        .command-title {
+            font-size: 1.55rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #1f2f1c;
+            margin: 0.2rem 0 0.25rem;
+        }
+
+        .badge-use {
+            font-size: 0.7rem;
+            background: #eef3ea;
+            color: #2c5e2a;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .card-body {
+            padding: 1.2rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .what-box, .when-box, .example-box {
+            border-left: 3px solid;
+            padding-left: 0.9rem;
+        }
+
+        .what-box {
+            border-left-color: #7faa6b;
+        }
+        .when-box {
+            border-left-color: #d9a56c;
+        }
+        .example-box {
+            border-left-color: #b48c6c;
+            background: #fefaf5;
+            padding: 0.8rem 0.9rem;
+            border-radius: 16px;
+            margin-top: 0.2rem;
+        }
+
+        .section-label {
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #6b5c4e;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .what-text, .when-text {
+            font-size: 0.9rem;
+            color: #2e2a25;
+        }
+
+        .example-text {
+            font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.8rem;
+            background: #f4efe8;
+            padding: 0.6rem;
+            border-radius: 14px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: #1a3a1a;
+            border: 1px solid #e4dbd0;
+            margin-top: 0.3rem;
+        }
+
+        .example-label {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #9b6a44;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border: none;
+            border-top: 1px solid #e8e0d8;
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #8f8276;
+            border-top: 1px solid #e2d9d0;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .commands-grid {
+                grid-template-columns: 1fr;
+            }
+            .command-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <h1>⚡ 12 commands that turn notes into ideas</h1>
+        <div class="tagline">
+            <span>📄 Surface patterns across years</span>
+            <span>💡 Generate grounded ideas</span>
+            <span>🔄 Track belief evolution</span>
+        </div>
+        <div class="sub">
+            Each command includes <strong>what it does</strong>, <strong>when to use it</strong>, and a ready-to-adapt prompt.
+            Turn Obsidian into a true thinking partner.
+        </div>
+    </div>
+
+    <div class="commands-grid">
+        <!-- 1. Unlinked Mention Harvest -->
+        <div class="command-card">
+            <div class="card-header">
+                <div class="command-number">command 01</div>
+                <div class="command-title">Unlinked Mention Harvest</div>
+                <span class="badge-use">🔗 latent connections</span>
+            </div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Finds notes that mention the current note's title but aren't linked yet. Surfaces hidden, implicit relationships.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">When you suspect a note is more relevant than backlinks suggest.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview)</span><div class="example-text">LIST FROM "" WHERE contains(file.content, this.file.name) AND !contains(file.outlinks, this.file.name)</div></div>
+            </div>
+        </div>
+
+        <!-- 2. Cluster by Co-occurring Tags -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 02</div><div class="command-title">Cluster by Co‑occurring Tags</div><span class="badge-use">🏷️ emergent themes</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Groups notes sharing 2+ uncommon tags, revealing hidden thematic clusters across years.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Discover emergent topics or unexpected idea constellations.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview)</span><div class="example-text">TABLE tags, file.ctime FROM #insight OR #question OR #contrarian WHERE length(filter(tags, (t) => !contains(["daily","reference"], t))) > 1 SORT file.ctime desc</div></div>
+            </div>
+        </div>
+
+        <!-- 3. Evolution of a Belief Over Time -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 03</div><div class="command-title">Evolution of a Belief</div><span class="badge-use">⏳ track shifts</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Extracts all notes containing a specific opinion/phrase, sorted chronologically to see how thinking changed.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Review personal intellectual history or a concept transformation.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (search)</span><div class="example-text">"believe that" OR "I used to think" OR "my stance on X" → sort by file.ctime</div></div>
+            </div>
+        </div>
+
+        <!-- 4. Abandoned Sparks -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 04</div><div class="command-title">Abandoned Sparks</div><span class="badge-use">🔥 forgotten seeds</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Lists notes with high potential signals (“maybe”, “interesting”) untouched for 6+ months.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Rediscover dormant ideas before they rot.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview)</span><div class="example-text">LIST FROM "" WHERE contains(file.content, "maybe") OR contains(file.content, "what if") AND file.mtime < date(today) - dur(6 months) SORT file.mtime asc</div></div>
+            </div>
+        </div>
+
+        <!-- 5. Cross-Year Juxtaposition -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 05</div><div class="command-title">Cross‑Year Juxtaposition</div><span class="badge-use">⚖️ creative tension</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Pairs two notes from different years sharing a core concept but contradicting each other.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Generate insights from dialectical disagreement across time.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (manual + semantic)</span><div class="example-text">Search "concept: productivity" → pick note 2021 vs 2025 → ask: "What would past me argue with current me?"</div></div>
+            </div>
+        </div>
+
+        <!-- 6. Recurring Question Detector -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 06</div><div class="command-title">Recurring Question Detector</div><span class="badge-use">❓ thought loops</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Finds the same/similar questions asked across different contexts and years.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Spot loops in your thinking and unresolved tensions.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (regex + Omnisearch)</span><div class="example-text">^.*\?.*$ → then manually review semantic duplicates: "How to prioritize?" vs "What should I work on next?"</div></div>
+            </div>
+        </div>
+
+        <!-- 7. Map of Contradictions -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 07</div><div class="command-title">Map of Contradictions</div><span class="badge-use">🗺️ dialectical pairs</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Displays linked notes with low tag overlap but connected via common third notes.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Find opposing idea pairs that fuel new synthesis.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview)</span><div class="example-text">LIST FROM [[]] WHERE !(all(flat(list(file.tags, this.file.tags)))) AND length(file.inlinks) > 2</div></div>
+            </div>
+        </div>
+
+        <!-- 8. Pattern Across N Years -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 08</div><div class="command-title">Pattern Across N Years</div><span class="badge-use">📆 thematic cycles</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Pulls one line from each year’s “yearly review” or December reflection to reveal emotional or thematic cycles.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Identify repeating patterns in mood, focus, or intentions.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview table)</span><div class="example-text">TABLE choice(contains(file.name, "2021"), "fear", contains(file.name, "2022"), "ambition", contains(file.name, "2023"), "burnout") as Theme FROM "Reviews"</div></div>
+            </div>
+        </div>
+
+        <!-- 9. Orphaned Insights -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 09</div><div class="command-title">Orphaned Insights</div><span class="badge-use">🧩 rich isolation</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Finds notes with high internal structure (headings, bold, bullets) but zero outgoing links.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Capture isolated gems and integrate them into your network.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview)</span><div class="example-text">LIST FROM "" WHERE length(file.outlinks) = 0 AND length(file.content) > 500 SORT length(file.content) desc</div></div>
+            </div>
+        </div>
+
+        <!-- 10. Mood-Concept Correlation -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 10</div><div class="command-title">Mood‑Concept Correlation</div><span class="badge-use">😌⚡ energy mapping</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">If you tag moods (#curious, #frustrated), finds which concepts appear most often per mood state.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Understand what topics energize vs drain you.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview GROUP BY)</span><div class="example-text">TABLE rows.file.link as Notes, length(rows) as Count FROM #curious OR #frustrated FLATTEN file.etags as tag WHERE tag != "#curious" AND tag != "#frustrated" GROUP BY tag SORT Count desc</div></div>
+            </div>
+        </div>
+
+        <!-- 11. Silent Evolution Detector -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 11</div><div class="command-title">Silent Evolution Detector</div><span class="badge-use">📝 subtle shifts</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Compares how you described the same person/idea/book 1+ years apart, using diff on two notes.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Track belief drift without explicit “I changed my mind”.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Git diff style)</span><div class="example-text">diff note_2023.md note_2025.md | grep "^[<>]" → reveals changed language, tone, conclusions</div></div>
+            </div>
+        </div>
+
+        <!-- 12. Generate Idea from Random Triplet -->
+        <div class="command-card">
+            <div class="card-header"><div class="command-number">command 12</div><div class="command-title">Random Triplet Idea</div><span class="badge-use">🎲 forced breakthrough</span></div>
+            <div class="card-body">
+                <div class="what-box"><span class="section-label">📌 WHAT IT DOES</span><div class="what-text">Pulls 3 unrelated notes (different folders, no shared tags) and forces a combinatorial idea.</div></div>
+                <div class="when-box"><span class="section-label">⏱ WHEN TO USE</span><div class="when-text">Creative block? Constraint-based ideation for fresh perspectives.</div></div>
+                <div class="example-box"><span class="example-label">✨ EXAMPLE PROMPT (Dataview random)</span><div class="example-text">LIST FROM ("-" + join(flat(rows.file.link), " ")) WHERE file.folder != "Templates" GROUP BY random() LIMIT 3</div></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        ⚡ Build these commands yourself — adapt & customize for your own vault.<br>
+        Each snippet turns raw notes into a <strong>thinking partner</strong>. Surface patterns, track evolution, and generate grounded ideas.
+    </footer>
+</div>
+</body>
+</html>
